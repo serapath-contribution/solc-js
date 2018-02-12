@@ -1,3 +1,5 @@
+const abi = require('./abi.js');
+
 /// Translate old style version numbers to semver.
 /// Old style: 0.3.6-3fc68da5/Release-Emscripten/clang
 ///            0.3.5-371690f0/Release-Emscripten/clang/Interpreter
@@ -57,7 +59,7 @@ function translateGasEstimates (gasEstimates) {
   return gasEstimatesTranslated;
 }
 
-function translateJsonCompilerOutput (output) {
+function translateJsonCompilerOutput (compilerVersion, output) {
   var ret = {};
 
   ret['errors'] = [];
@@ -103,7 +105,7 @@ function translateJsonCompilerOutput (output) {
     }
 
     var contractOutput = {
-      'abi': JSON.parse(contractInput['interface']),
+      'abi': abi.update(compilerVersion, JSON.parse(contractInput['interface'])),
       'metadata': contractInput['metadata'],
       'evm': {
         'legacyAssembly': contractInput['assembly'],
