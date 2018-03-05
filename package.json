@@ -1,5 +1,5 @@
 {
-  "name": "solc",
+  "name": "solc-js",
   "version": "0.4.20",
   "description": "Solidity compiler",
   "main": "index.js",
